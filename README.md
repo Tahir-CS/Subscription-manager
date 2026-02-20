@@ -228,6 +228,17 @@ Risk Score =
 - `activeTab` — Analyze current page content
 - `scripting` — Inject detection logic
 
+### Privacy Policy
+
+A full privacy policy is available in [`PRIVACY.md`](PRIVACY.md) (Markdown format) and [`PRIVACY.html`](PRIVACY.html) (HTML format, ready to host).
+
+**To host the privacy policy on GitHub Pages:**
+
+1. Create a `gh-pages` branch: `git checkout --orphan gh-pages`
+2. Copy `PRIVACY.html` to your gh-pages branch
+3. Access it at: `https://tahir-cs.github.io/subscription-manager/PRIVACY.html`
+4. Link to it in your Chrome Web Store submission
+
 ---
 
 ## 🛠️ Development

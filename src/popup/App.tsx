@@ -3,11 +3,28 @@ import { Subscription } from '../types';
 import { Storage } from '../utils/storage';
 import { daysUntilRenewal, getRiskLevel, formatDate } from '../utils/detector';
 
+const defaultForm = () => {
+  const today = new Date();
+  const renewal = new Date(today);
+  renewal.setMonth(renewal.getMonth() + 1);
+  return {
+    serviceName: '',
+    url: '',
+    price: '',
+    billingCycle: 'monthly' as 'weekly' | 'monthly' | 'yearly',
+    status: 'active' as 'active' | 'trial',
+    renewalDate: renewal.toISOString().split('T')[0],
+  };
+};
+
 export const App: React.FC = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [activeTab, setActiveTab] = useState<'all' | 'trials' | 'active'>('all');
   const [monthlyBurnRate, setMonthlyBurnRate] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [form, setForm] = useState(defaultForm());
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     loadData();
@@ -36,6 +53,54 @@ export const App: React.FC = () => {
   const handleMarkCancelled = async (id: string) => {
     await Storage.updateSubscription(id, { status: 'cancelled' });
     await loadData();
+  };
+
+  const openAddModal = () => {
+    setForm(defaultForm());
+    setFormError('');
+    setShowAddModal(true);
+  };
+
+  const handleFormChange = (field: string, value: string) => {
+    setForm(prev => {
+      const next = { ...prev, [field]: value };
+      // Auto-update renewal date when billing cycle changes
+      if (field === 'billingCycle') {
+        const now = new Date();
+        if (value === 'yearly')  now.setFullYear(now.getFullYear() + 1);
+        else if (value === 'weekly') now.setDate(now.getDate() + 7);
+        else now.setMonth(now.getMonth() + 1);
+        next.renewalDate = now.toISOString().split('T')[0];
+      }
+      return next;
+    });
+  };
+
+  const handleAddManually = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.serviceName.trim()) { setFormError('Service name is required'); return; }
+    if (!form.price || isNaN(parseFloat(form.price))) { setFormError('Enter a valid price'); return; }
+
+    const subscription: Subscription = {
+      id: 'sub_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 8),
+      userId: 'default',
+      serviceName: form.serviceName.trim(),
+      url: form.url.trim() || window.location.href,
+      price: parseFloat(form.price),
+      currency: 'USD',
+      billingCycle: form.billingCycle,
+      status: form.status,
+      renewalDate: new Date(form.renewalDate).toISOString(),
+      startDate: new Date().toISOString(),
+      trialLength: form.status === 'trial' ? Math.ceil((new Date(form.renewalDate).getTime() - Date.now()) / 86400000) : undefined,
+      riskScore: 20,
+      darkPatterns: [],
+      createdAt: new Date().toISOString(),
+    };
+
+    await Storage.addSubscription(subscription);
+    await loadData();
+    setShowAddModal(false);
   };
 
   const filteredSubscriptions = subscriptions.filter(sub => {
@@ -87,6 +152,105 @@ export const App: React.FC = () => {
         </div>
       </div>
 
+      {/* Add Manual Modal */}
+      {showAddModal && (
+        <div style={styles.modalOverlay} onClick={() => setShowAddModal(false)}>
+          <div style={styles.modal} onClick={e => e.stopPropagation()}>
+            <div style={styles.modalHeader}>
+              <span style={{ fontWeight: 700, fontSize: 15 }}>➕ Add Subscription Manually</span>
+              <button onClick={() => setShowAddModal(false)} style={styles.modalClose}>✕</button>
+            </div>
+
+            <form onSubmit={handleAddManually} style={{ margin: 0 }}>
+              {formError && (
+                <div style={styles.formError}>{formError}</div>
+              )}
+
+              <div style={styles.formGroup}>
+                <label style={styles.formLabel}>Service Name *</label>
+                <input
+                  style={styles.formInput}
+                  type="text"
+                  placeholder="e.g. Netflix, Spotify"
+                  value={form.serviceName}
+                  onChange={e => handleFormChange('serviceName', e.target.value)}
+                  required
+                  autoFocus
+                />
+              </div>
+
+              <div style={styles.formGroup}>
+                <label style={styles.formLabel}>Website URL</label>
+                <input
+                  style={styles.formInput}
+                  type="url"
+                  placeholder="https://netflix.com"
+                  value={form.url}
+                  onChange={e => handleFormChange('url', e.target.value)}
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 12 }}>
+                <div>
+                  <label style={styles.formLabel}>Price (USD) *</label>
+                  <input
+                    style={styles.formInput}
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="9.99"
+                    value={form.price}
+                    onChange={e => handleFormChange('price', e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label style={styles.formLabel}>Billing Cycle</label>
+                  <select
+                    style={styles.formInput}
+                    value={form.billingCycle}
+                    onChange={e => handleFormChange('billingCycle', e.target.value)}
+                  >
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
+                <div>
+                  <label style={styles.formLabel}>Status</label>
+                  <select
+                    style={styles.formInput}
+                    value={form.status}
+                    onChange={e => handleFormChange('status', e.target.value)}
+                  >
+                    <option value="active">Active</option>
+                    <option value="trial">Free Trial</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={styles.formLabel}>Next Renewal</label>
+                  <input
+                    style={styles.formInput}
+                    type="date"
+                    value={form.renewalDate}
+                    onChange={e => handleFormChange('renewalDate', e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button type="submit" style={styles.btnPrimary}>🛡️ Add Subscription</button>
+                <button type="button" style={styles.btnSecondary} onClick={() => setShowAddModal(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Tabs */}
       <div style={styles.tabs}>
         <button
@@ -107,6 +271,13 @@ export const App: React.FC = () => {
         >
           Active
         </button>
+        <button
+          style={styles.addBtn}
+          onClick={openAddModal}
+          title="Add subscription manually"
+        >
+          + Add
+        </button>
       </div>
 
       {/* Subscriptions List */}
@@ -118,6 +289,9 @@ export const App: React.FC = () => {
             <div style={styles.emptyText}>
               Click any "Subscribe" or "Start Trial" button on a website and Guardian will pop up to track it — just like a password manager.
             </div>
+            <button style={{ ...styles.btnPrimary, marginTop: 16, padding: '10px 20px' }} onClick={openAddModal}>
+              ➕ Add Manually
+            </button>
           </div>
         ) : (
           filteredSubscriptions.map(sub => (
@@ -470,5 +644,77 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: 13,
     fontWeight: 600,
     cursor: 'pointer',
-  }
+  },
+  addBtn: {
+    marginLeft: 'auto',
+    padding: '8px 14px',
+    background: 'linear-gradient(135deg, #667eea, #764ba2)',
+    color: 'white',
+    border: 'none',
+    borderRadius: 6,
+    fontSize: 13,
+    fontWeight: 700,
+    cursor: 'pointer',
+    alignSelf: 'center',
+  },
+  modalOverlay: {
+    position: 'fixed' as const,
+    inset: 0,
+    background: 'rgba(0,0,0,0.45)',
+    zIndex: 1000,
+    display: 'flex',
+    alignItems: 'flex-end',
+  },
+  modal: {
+    width: '100%',
+    background: 'white',
+    borderRadius: '14px 14px 0 0',
+    padding: 20,
+    boxShadow: '0 -8px 30px rgba(0,0,0,0.2)',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  },
+  modalHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  modalClose: {
+    background: 'none',
+    border: 'none',
+    fontSize: 18,
+    cursor: 'pointer',
+    color: '#9ca3af',
+    padding: 0,
+  },
+  formGroup: {
+    marginBottom: 12,
+  },
+  formLabel: {
+    display: 'block',
+    fontSize: 11,
+    fontWeight: 600,
+    color: '#374151',
+    marginBottom: 4,
+    textTransform: 'uppercase' as const,
+  },
+  formInput: {
+    width: '100%',
+    padding: '8px 10px',
+    border: '1px solid #e5e7eb',
+    borderRadius: 7,
+    fontSize: 13,
+    boxSizing: 'border-box' as const,
+    outline: 'none',
+    background: 'white',
+  },
+  formError: {
+    background: '#fef2f2',
+    border: '1px solid #fca5a5',
+    color: '#991b1b',
+    fontSize: 12,
+    padding: '8px 10px',
+    borderRadius: 6,
+    marginBottom: 12,
+  },
 };
