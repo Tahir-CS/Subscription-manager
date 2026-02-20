@@ -1,0 +1,13 @@
+PLACEHOLDER ICON - SIZE 48x48
+
+To create proper icons:
+1. Open generate-icons.html in a browser
+2. It will auto-download icon16.png, icon48.png, icon128.png
+3. Move them to the public/icons/ folder
+4. Rebuild the extension
+
+Or use online tools:
+- https://favicon.io/emoji-favicons/shield/
+- https://www.favicon-generator.org/
+
+The extension will load without icons, but won't look professional.

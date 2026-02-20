@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Icons</title>
+</head>
+<body>
+  <h2>Icon Generator</h2>
+  <p>Open this file in a browser and it will generate placeholder icons.</p>
+  <canvas id="canvas"></canvas>
+  
+  <script>
+    function generateIcon(size) {
+      const canvas = document.getElementById('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      
+      // Gradient background
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#667eea');
+      gradient.addColorStop(1, '#764ba2');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, size, size);
+      
+      // Shield shape
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      const centerX = size / 2;
+      const centerY = size / 2;
+      const shieldWidth = size * 0.5;
+      const shieldHeight = size * 0.6;
+      
+      ctx.moveTo(centerX, centerY - shieldHeight / 2);
+      ctx.lineTo(centerX + shieldWidth / 2, centerY - shieldHeight / 3);
+      ctx.lineTo(centerX + shieldWidth / 2, centerY + shieldHeight / 6);
+      ctx.quadraticCurveTo(centerX + shieldWidth / 2, centerY + shieldHeight / 2, centerX, centerY + shieldHeight / 2);
+      ctx.quadraticCurveTo(centerX - shieldWidth / 2, centerY + shieldHeight / 2, centerX - shieldWidth / 2, centerY + shieldHeight / 6);
+      ctx.lineTo(centerX - shieldWidth / 2, centerY - shieldHeight / 3);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Checkmark
+      ctx.strokeStyle = '#667eea';
+      ctx.lineWidth = size / 16;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(centerX - shieldWidth / 6, centerY);
+      ctx.lineTo(centerX - shieldWidth / 12, centerY + shieldHeight / 6);
+      ctx.lineTo(centerX + shieldWidth / 4, centerY - shieldHeight / 6);
+      ctx.stroke();
+      
+      // Download
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `icon${size}.png`;
+        a.click();
+      });
+    }
+    
+    // Generate all sizes
+    setTimeout(() => generateIcon(16), 100);
+    setTimeout(() => generateIcon(48), 200);
+    setTimeout(() => generateIcon(128), 300);
+  </script>
+</body>
+</html>
