@@ -1,152 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription Guardian — Privacy & Documentation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 16px;
-            padding: 60px 40px;
-            max-width: 600px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-        
-        .logo {
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            color: #1f2937;
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            color: #6b7280;
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-        
-        a {
-            display: inline-block;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn-secondary {
-            background: #f3f4f6;
-            color: #374151;
-            border: 2px solid #e5e7eb;
-        }
-        
-        .btn-secondary:hover {
-            background: #e5e7eb;
-        }
-        
-        .info {
-            background: #f0f9ff;
-            border-left: 4px solid #667eea;
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: left;
-        }
-        
-        .info h3 {
-            color: #1e40af;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        
-        .info p {
-            color: #1e3a8a;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-            color: #9ca3af;
-            font-size: 13px;
-        }
-        
-        .footer a {
-            color: #667eea;
-            padding: 0;
-            display: inline;
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Guardian — The Privacy-First Subscription & Free-Trial Guardian</title>
+  <meta name="description" content="Detect subscriptions and free trials automatically as you browse. 100% local, privacy-first, zero cloud tracking.">
+  <link rel="icon" href="../public/icons/icon48.png" type="image/png">
+  <style>
+    :root {
+      --bg: #000000;
+      --card-bg: #12121a;
+      --card-inner: #191924;
+      --border: #38384e;
+      --border-subtle: #242432;
+      --text: #ffffff;
+      --text-muted: #a1a1aa;
+      --accent-blue: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-amber: #fbbf24;
+      --accent-red: #f87171;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      background: #181822;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .brand-name {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+    nav a:hover {
+      color: #ffffff;
+    }
+    .nav-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #000000 !important;
+      font-weight: 800 !important;
+      border: 1px solid #ffffff;
+      transition: opacity 0.15s ease;
+    }
+    .nav-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 84px 0 54px;
+      text-align: center;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent-blue);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+    }
+    h1 {
+      font-size: clamp(38px, 5.5vw, 60px);
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      margin-bottom: 22px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 40%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-muted);
+      max-width: 660px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #ffffff;
+    }
+    .btn-primary:hover {
+      background: #e4e4e7;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: #181822;
+      color: #ffffff;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: #252535;
+      transform: translateY(-1px);
+    }
+
+    /* Live Preview Mockup */
+    .preview-wrapper {
+      margin: 48px auto 80px;
+      max-width: 640px;
+      background: #0d0d13;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.06);
+      text-align: left;
+    }
+    .mockup-header {
+      padding: 14px 18px;
+      background: #15151e;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mockup-header-title {
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mockup-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: #101017;
+    }
+    .metric-card {
+      background: #181822;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .metric-val {
+      font-size: 18px;
+      font-weight: 900;
+      margin-top: 3px;
+      font-family: "SF Mono", monospace;
+    }
+    .mockup-body {
+      padding: 16px 18px;
+    }
+    .mockup-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sub-name {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .sub-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      font-family: "SF Mono", monospace;
+      text-transform: uppercase;
+    }
+    .badge-red {
+      background: rgba(248, 113, 113, 0.16);
+      color: var(--accent-red);
+      border: 1px solid rgba(248, 113, 113, 0.4);
+    }
+    .badge-green {
+      background: rgba(74, 222, 128, 0.16);
+      color: var(--accent-green);
+      border: 1px solid rgba(74, 222, 128, 0.4);
+    }
+    .sub-price {
+      text-align: right;
+    }
+    .sub-amount {
+      font-size: 16px;
+      font-weight: 900;
+      font-family: "SF Mono", monospace;
+    }
+    .sub-cycle {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Features Grid */
+    .features-section {
+      padding: 40px 0 80px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 48px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.7);
+      transition: border-color 0.15s ease;
+    }
+    .feature-card:hover {
+      border-color: #555577;
+    }
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    /* Quick Links Banners */
+    .legal-banners {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 40px 0 80px;
+    }
+    @media (max-width: 680px) {
+      .legal-banners {
+        grid-template-columns: 1fr;
+      }
+    }
+    .legal-card {
+      background: #0f0f15;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .legal-card h4 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+    .legal-card p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+    .legal-card a {
+      color: var(--accent-blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legal-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 44px 0 54px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .footer-nav a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">🛡️</div>
-        <h1>Subscription Guardian</h1>
-        <p class="subtitle">
-            The intelligent browser extension that detects and manages subscriptions as you browse
-        </p>
-        
-        <div class="links">
-            <a href="PRIVACY.html" class="btn-primary">📋 Read Privacy Policy</a>
-            <a href="https://github.com/Tahir-CS/Subscription-manager" class="btn-secondary" target="_blank">💻 View on GitHub</a>
+  <div class="container">
+    <header>
+      <a href="index.html" class="brand">
+        <div class="logo-badge">🛡️</div>
+        <span class="brand-name">Subscription Guardian</span>
+      </a>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="PRIVACY.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="https://github.com/Tahir-CS/Subscription-manager" target="_blank" rel="noopener" class="nav-btn">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="pill">🔒 100% Client-Side · Zero Cloud Tracking · Local Storage</div>
+        <h1>The Privacy-First Subscription &amp; Free-Trial Guardian</h1>
+        <p>Detect recurring charges and free trials automatically as you browse, autofill 200+ plans with 1-click cancel links, and prevent unexpected credit card charges.</p>
+        <div class="cta-group">
+          <a href="https://github.com/Tahir-CS/Subscription-manager" target="_blank" rel="noopener" class="btn btn-primary">
+            <span>Get for Chrome</span> &rarr;
+          </a>
+          <a href="PRIVACY.html" class="btn btn-secondary">
+            <span>Read Privacy Policy</span>
+          </a>
+          <a href="terms.html" class="btn btn-secondary">
+            <span>Terms of Service</span>
+          </a>
         </div>
-        
-        <div class="info">
-            <h3>ℹ️ About This Page</h3>
-            <p>This site hosts the official privacy policy for Subscription Guardian. The extension is 100% privacy-focused — all data stays on your device, no tracking, no servers.</p>
+      </section>
+
+      <!-- Visual Replica Mockup -->
+      <section class="preview-wrapper">
+        <div class="mockup-header">
+          <div class="mockup-header-title">
+            <span>🛡️</span>
+            <span>Subscription Guardian &mdash; Active Monitor</span>
+          </div>
+          <span style="font-size: 11px; font-weight: 700; color: var(--accent-green); background: rgba(74,222,128,0.12); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(74,222,128,0.3);">PROTECTED</span>
         </div>
-        
-        <div class="footer">
-            <p>
-                <a href="https://github.com/Tahir-CS/Subscription-manager" target="_blank">GitHub</a> • 
-                Built with ❤️ for subscription awareness
-            </p>
+        <div class="mockup-metrics">
+          <div class="metric-card">
+            <div class="metric-label">Monthly Burn</div>
+            <div class="metric-val" style="color: #ffffff;">$55.49<span style="font-size: 12px; color: var(--text-muted);">/mo</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Upcoming Due</div>
+            <div class="metric-val" style="color: var(--accent-red);">Tomorrow</div>
+          </div>
         </div>
-    </div>
+        <div class="mockup-body">
+          <div class="mockup-card">
+            <div>
+              <div class="sub-name">ChatGPT Plus</div>
+              <div class="sub-meta">
+                <span class="badge badge-red">Cancel Before Charge</span>
+                <span style="font-size: 12px; color: var(--text-muted);">Due in 1d</span>
+              </div>
+            </div>
+            <div class="sub-price">
+              <div class="sub-amount">$20.00</div>
+              <div class="sub-cycle">Monthly</div>
+            </div>
+          </div>
+          <div class="mockup-card">
+            <div>
+              <div class="sub-name">Netflix Standard</div>
+              <div class="sub-meta">
+                <span class="badge badge-green">Keep / Active</span>
+                <span style="font-size: 12px; color: var(--text-muted);">Due in 14d</span>
+              </div>
+            </div>
+            <div class="sub-price">
+              <div class="sub-amount">$15.49</div>
+              <div class="sub-cycle">Monthly</div>
+            </div>
+          </div>
+          <div class="mockup-card" style="margin-bottom: 0;">
+            <div>
+              <div class="sub-name">Claude Pro</div>
+              <div class="sub-meta">
+                <span class="badge badge-green">Keep / Active</span>
+                <span style="font-size: 12px; color: var(--text-muted);">Due in 24d</span>
+              </div>
+            </div>
+            <div class="sub-price">
+              <div class="sub-amount">$20.00</div>
+              <div class="sub-cycle">Monthly</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section id="features" class="features-section">
+        <h2 class="section-title">Built For Control, Not Data Harvesting</h2>
+        <p class="section-subtitle">Unlike cloud budgeting apps that sell your banking credentials, Subscription Guardian operates 100% inside your browser.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="card-icon">⚡</div>
+            <h3>In-Page Checkout Detection</h3>
+            <p>Automatically surfaces price, billing cycle, and trial lengths whenever you click a subscription or free-trial button on checkout pages.</p>
+          </div>
+          <div class="feature-card">
+            <div class="card-icon">🎯</div>
+            <h3>200+ 1-Click Plan Autofill</h3>
+            <p>Instant pricing rates and direct cancellation URLs for Netflix, ChatGPT, Claude, Spotify, Adobe, Cursor, Apple, and 200+ popular services.</p>
+          </div>
+          <div class="feature-card">
+            <div class="card-icon">🚨</div>
+            <h3>Cancel-Before-Charge Default</h3>
+            <p>Default reminder intent is pre-set to cancel before charge, so you never get billed when trying new SaaS tools and free trials.</p>
+          </div>
+          <div class="feature-card">
+            <div class="card-icon">🔒</div>
+            <h3>100% Local Browser Storage</h3>
+            <p>All subscription records, costs, and alert schedules are saved in <code>chrome.storage.local</code>. No telemetry, no cloud sync, no tracking.</p>
+          </div>
+          <div class="feature-card">
+            <div class="card-icon">📊</div>
+            <h3>CSV Report Export</h3>
+            <p>Generate finance-ready CSV expense reports with normalized monthly equivalent costs, renewal dates, and payment tags with one click.</p>
+          </div>
+          <div class="feature-card">
+            <div class="card-icon">⏰</div>
+            <h3>System Desktop Reminders</h3>
+            <p>Configurable Chrome alarms deliver desktop notifications at 7-day, 3-day, 1-day, and due-day checkpoints before money leaves your account.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dedicated Documentation & Legal Links -->
+      <section class="legal-banners">
+        <div class="legal-card">
+          <div>
+            <h4>📋 Official Privacy Policy</h4>
+            <p>Learn how Subscription Guardian safeguards your data with local-only storage, zero telemetry, and Google User Data compliance.</p>
+          </div>
+          <a href="PRIVACY.html">Read Privacy Policy &rarr;</a>
+        </div>
+        <div class="legal-card">
+          <div>
+            <h4>📜 Terms of Service</h4>
+            <p>Review the terms, software license, and open-source usage guidelines for the Subscription Guardian browser extension.</p>
+          </div>
+          <a href="terms.html">Read Terms of Service &rarr;</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="PRIVACY.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="https://github.com/Tahir-CS/Subscription-manager" target="_blank" rel="noopener">GitHub Repository</a>
+      </div>
+      <p>&copy; 2026 Subscription Guardian. All rights reserved. Built for private subscription awareness.</p>
+    </footer>
+  </div>
 </body>
 </html>

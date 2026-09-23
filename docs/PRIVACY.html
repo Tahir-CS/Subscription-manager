@@ -1,362 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — Subscription Guardian</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 20px;
-        }
-        
-        .header h1 {
-            font-size: 32px;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .header .date {
-            color: #6b7280;
-            font-size: 14px;
-        }
-        
-        h2 {
-            color: #1f2937;
-            font-size: 24px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-left: 4px solid #667eea;
-            padding-left: 15px;
-        }
-        
-        h3 {
-            color: #374151;
-            font-size: 18px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-            color: #4b5563;
-        }
-        
-        ul {
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-            color: #4b5563;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            background: #f9fafb;
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        th {
-            background: #f3f4f6;
-            font-weight: 600;
-            color: #374151;
-        }
-        
-        tr:hover {
-            background: #f3f4f6;
-        }
-        
-        .check {
-            color: #10b981;
-            font-weight: bold;
-        }
-        
-        .cross {
-            color: #ef4444;
-            font-weight: bold;
-        }
-        
-        a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-        
-        a:hover {
-            color: #764ba2;
-            text-decoration: underline;
-        }
-        
-        .highlight {
-            background: #fef3c7;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #f59e0b;
-            margin: 20px 0;
-        }
-        
-        .highlight strong {
-            color: #92400e;
-        }
-        
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-            text-align: center;
-            color: #6b7280;
-            font-size: 14px;
-        }
-        
-        .emoji {
-            margin-right: 8px;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 24px;
-            }
-            
-            h2 {
-                font-size: 20px;
-            }
-            
-            table {
-                font-size: 13px;
-            }
-            
-            th, td {
-                padding: 8px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Subscription Guardian</title>
+  <meta name="description" content="Privacy Policy for Subscription Guardian browser extension.">
+  <link rel="icon" href="../public/icons/icon48.png" type="image/png">
+  <style>
+    :root {
+      --bg: #000000;
+      --card-bg: #12121a;
+      --border: #38384e;
+      --text: #ffffff;
+      --text-muted: #a1a1aa;
+      --accent: #38bdf8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid #1f1f26;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .logo-badge {
+      width: 36px;
+      height: 36px;
+      background: #18181f;
+      border: 1px solid #383848;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+    .brand-name {
+      font-size: 18px;
+      font-weight: 800;
+    }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 20px;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    .content {
+      padding: 60px 0 80px;
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .meta {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #1f1f26;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 36px 0 14px;
+      color: #ffffff;
+      border-bottom: 1px solid #22222d;
+      padding-bottom: 8px;
+    }
+    p, li {
+      color: #d4d4d8;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    ul {
+      margin-left: 24px;
+      margin-bottom: 20px;
+    }
+    .highlight-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: #181822;
+      color: #fff;
+    }
+    footer {
+      border-top: 1px solid #1f1f26;
+      padding: 30px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🛡️ Privacy Policy</h1>
-            <h2 style="border: none; padding: 0; color: #667eea; font-size: 20px; margin: 0;">Subscription Guardian</h2>
-            <div class="date">Last Updated: February 21, 2026</div>
-        </div>
+  <div class="container">
+    <header>
+      <a href="index.html" class="brand">
+        <div class="logo-badge">🛡️</div>
+        <span class="brand-name">Subscription Guardian</span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="privacy.html" style="color: #fff;">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </header>
 
-        <h2>Overview</h2>
-        <p>Subscription Guardian is designed with <strong>privacy-first</strong> principles. We do not collect, store, or transmit any personal data. All data remains on your device.</p>
+    <main class="content">
+      <h1>Privacy Policy</h1>
+      <div class="meta">Effective Date: September 2026 · Subscription Guardian Browser Extension</div>
 
-        <h2>What Data We Store</h2>
-        <h3>Local Browser Storage Only</h3>
-        <ul>
-            <li><strong>Subscriptions you manually track:</strong> Service name, price, renewal date, billing cycle</li>
-            <li><strong>User preferences:</strong> Tab selections, UI state</li>
-            <li><strong>Notification settings:</strong> Alarm times for renewal reminders</li>
-        </ul>
-        <p>All data is stored exclusively in your browser's <code>chrome.storage.local</code> and <strong>never leaves your computer</strong>.</p>
+      <div class="highlight-box">
+        <strong>Core Privacy Promise:</strong> Subscription Guardian is built on local-first principles. We do not operate remote tracking servers, sell your data, or collect telemetry. All tracked subscriptions and alert settings remain on your local device.
+      </div>
 
-        <h3>What We DON'T Collect</h3>
-        <ul>
-            <li><span class="cross">✗</span> Personal identification (name, email, phone)</li>
-            <li><span class="cross">✗</span> Payment details or bank information</li>
-            <li><span class="cross">✗</span> Passwords or credentials</li>
-            <li><span class="cross">✗</span> Location data</li>
-            <li><span class="cross">✗</span> Browsing history (we only analyze pages when you click)</li>
-            <li><span class="cross">✗</span> Behavioral tracking</li>
-            <li><span class="cross">✗</span> Analytics or telemetry</li>
-        </ul>
+      <h2>1. Information We Store Locally</h2>
+      <p>All data processed by Subscription Guardian is stored exclusively in your browser via <code>chrome.storage.local</code>. This data includes:</p>
+      <ul>
+        <li><strong>Subscription Records:</strong> Service name, plan price, currency, billing cycle, renewal date, and your cancellation/renewal intent.</li>
+        <li><strong>User Preferences:</strong> Notification reminder presets and display settings.</li>
+        <li><strong>Locally Parsed Candidates:</strong> Subscription details extracted from user-initiated receipt parsing.</li>
+      </ul>
+      <p>This data never leaves your personal browser profile unless you explicitly export it as a CSV file to your local computer.</p>
 
-        <h2>Permissions Explained</h2>
-        <p>Subscription Guardian requests the following Chrome permissions:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Permission</th>
-                    <th>Why We Need It</th>
-                    <th>Data Shared?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>storage</code></td>
-                    <td>Save subscriptions locally to persist your data</td>
-                    <td><span class="check">✓</span> Local only</td>
-                </tr>
-                <tr>
-                    <td><code>alarms</code></td>
-                    <td>Schedule renewal reminders (24h before charge)</td>
-                    <td><span class="check">✓</span> Local only</td>
-                </tr>
-                <tr>
-                    <td><code>notifications</code></td>
-                    <td>Send you desktop alerts before renewal</td>
-                    <td><span class="check">✓</span> Local only</td>
-                </tr>
-                <tr>
-                    <td><code>activeTab</code></td>
-                    <td>Detect subscription pages you visit (on-click only)</td>
-                    <td><span class="cross">✗</span> Not stored</td>
-                </tr>
-                <tr>
-                    <td><code>scripting</code></td>
-                    <td>Inject our detection script into pages</td>
-                    <td><span class="cross">✗</span> Not stored</td>
-                </tr>
-                <tr>
-                    <td><code>&lt;all_urls&gt;</code></td>
-                    <td>Work on any website with subscriptions</td>
-                    <td><span class="cross">✗</span> Not stored</td>
-                </tr>
-            </tbody>
-        </table>
+      <h2>2. What We Never Collect</h2>
+      <ul>
+        <li>❌ No bank account credentials or credit card numbers.</li>
+        <li>❌ No browsing history or web traffic tracking.</li>
+        <li>❌ No advertising identifiers, telemetry, or analytics trackers.</li>
+        <li>❌ No cloud account creation or third-party profiling.</li>
+      </ul>
 
-        <h2>How We Analyze Pages</h2>
-        <ol>
-            <li><strong>User clicks a subscription button</strong> on a webpage</li>
-            <li>Extension scans the local page content (DOM) to extract:
-                <ul>
-                    <li>Plan name (e.g., "Premium")</li>
-                    <li>Price</li>
-                    <li>Billing cycle</li>
-                    <li>Trial information</li>
-                    <li>Dark pattern warnings</li>
-                </ul>
-            </li>
-            <li><strong>Analysis happens entirely in your browser</strong> — nothing is sent anywhere</li>
-            <li>We show a popup with extracted details</li>
-            <li>You confirm before we save anything</li>
-        </ol>
+      <h2>3. Google User Data & Optional Gmail Access</h2>
+      <p>Subscription Guardian offers an optional, user-initiated feature allowing you to scan your Gmail inbox for subscription renewal receipts and trial confirmations:</p>
+      <ul>
+        <li><strong>Google API Scopes:</strong> When activated by the user, the extension requests read-only access (<code>https://www.googleapis.com/auth/gmail.readonly</code>).</li>
+        <li><strong>Local Processing Only:</strong> Email headers and snippets matching renewal queries are parsed entirely in-memory inside your local browser.</li>
+        <li><strong>No Email Storage:</strong> Raw email messages, bodies, or full message histories are <em>never</em> saved to disk and never transmitted to any external server. Only the final extracted subscription name and price are displayed for your review.</li>
+        <li><strong>Limited Use Disclosure:</strong> Subscription Guardian's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener" style="color: var(--accent);">Google API Services User Data Policy</a>, including the Limited Use requirements.</li>
+      </ul>
 
-        <h2>No Third-Party Services</h2>
-        <ul>
-            <li><span class="cross">✗</span> No tracking pixels</li>
-            <li><span class="cross">✗</span> No advertising networks</li>
-            <li><span class="cross">✗</span> No analytics services (Google Analytics, Mixpanel, etc.)</li>
-            <li><span class="cross">✗</span> No CDNs that analyze you</li>
-            <li><span class="cross">✗</span> No external APIs for subscription data</li>
-            <li><span class="cross">✗</span> No cloud synchronization</li>
-        </ul>
+      <h2>4. Browser Permissions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Permission</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>storage</code></td>
+            <td>Save your subscription list and reminder settings locally in <code>chrome.storage.local</code>.</td>
+          </tr>
+          <tr>
+            <td><code>alarms</code></td>
+            <td>Wake the background script at scheduled intervals to check upcoming renewal dates.</td>
+          </tr>
+          <tr>
+            <td><code>notifications</code></td>
+            <td>Display desktop notifications alerting you before a free trial ends or a renewal charge occurs.</td>
+          </tr>
+          <tr>
+            <td><code>activeTab</code> / <code>scripting</code></td>
+            <td>Detect subscription buttons and pricing cards when clicked by the user on signup pages.</td>
+          </tr>
+          <tr>
+            <td><code>identity</code></td>
+            <td>Facilitate optional, user-initiated OAuth authentication for local Gmail receipt scanning.</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <h2>Data Deletion</h2>
-        <p>You have complete control:</p>
-        <ol>
-            <li><strong>Delete individual subscriptions</strong> — Click "Delete" on any subscription in the dashboard</li>
-            <li><strong>Delete all data</strong> — Uninstall the extension or use Chrome's storage clearing:
-                <ul>
-                    <li>Settings → Privacy and security → Clear browsing data → "Cookies and other site data"</li>
-                </ul>
-            </li>
-        </ol>
+      <h2>5. Data Deletion & Control</h2>
+      <p>You have full ownership of your data at all times:</p>
+      <ul>
+        <li>You can edit or delete any tracked subscription directly inside the extension popup or dashboard at any time.</li>
+        <li>Uninstalling the extension immediately purges all stored data from your browser.</li>
+      </ul>
 
-        <h2>Open Source Transparency</h2>
-        <p>The entire extension is <strong>open source</strong> on <a href="https://github.com/Tahir-CS/Subscription-manager" target="_blank">GitHub</a>:</p>
-        <ul>
-            <li>Read the source code anytime</li>
-            <li>Audit what permissions we use</li>
-            <li>Verify no hidden data collection</li>
-            <li>Contribute improvements</li>
-        </ul>
+      <h2>6. Open Source Transparency</h2>
+      <p>Subscription Guardian is open source. You can audit our entire source code, build scripts, and permissions directly on our <a href="https://github.com/Tahir-CS/Subscription-manager" target="_blank" rel="noopener" style="color: var(--accent);">GitHub Repository</a>.</p>
 
-        <h2>Security</h2>
-        <ul>
-            <li><span class="check">✓</span> No external network calls from the extension</li>
-            <li><span class="check">✓</span> No server backend — everything is client-side</li>
-            <li><span class="check">✓</span> HTTPS only for any links to external sites</li>
-            <li><span class="check">✓</span> Code minification in production (standard practice)</li>
-        </ul>
+      <h2>7. Contact</h2>
+      <p>If you have any questions or feedback regarding this Privacy Policy, please open an issue on our GitHub repository or contact the developer at <code>mtahirbutt1005@gmail.com</code>.</p>
+    </main>
 
-        <h2>Compliance</h2>
-        <p>This extension complies with:</p>
-        <ul>
-            <li><span class="check">✓</span> Chrome Web Store Developer Program Policies</li>
-            <li><span class="check">✓</span> Microsoft Edge Add-ons Policies</li>
-            <li><span class="check">✓</span> GDPR (no data collection = no GDPR obligations)</li>
-            <li><span class="check">✓</span> CCPA (no personal information collected)</li>
-        </ul>
-
-        <h2>Changes to This Policy</h2>
-        <p>If we update this policy, we will:</p>
-        <ol>
-            <li>Update the "Last Updated" date at the top</li>
-            <li>Post changes on <a href="https://github.com/Tahir-CS/Subscription-manager">GitHub</a></li>
-            <li>Notify users in a future extension update</li>
-        </ol>
-
-        <h2>Contact Us</h2>
-        <p><strong>Questions about privacy?</strong></p>
-        <ul>
-            <li><strong>GitHub Issues:</strong> <a href="https://github.com/Tahir-CS/Subscription-manager/issues" target="_blank">Create an issue</a></li>
-            <li><strong>Email:</strong> (Add your contact email here)</li>
-            <li><strong>Twitter/X:</strong> (Add your handle here)</li>
-        </ul>
-
-        <h2>What This Means For You</h2>
-        <div class="highlight">
-            <p><span class="emoji">✓</span> <strong>Your data is yours alone</strong></p>
-            <ul style="margin-left: 30px;">
-                <li>No selling to advertisers</li>
-                <li>No sharing with third parties</li>
-                <li>No government requests (we have nothing to give)</li>
-                <li>No backdoors or surveillance</li>
-            </ul>
-        </div>
-
-        <div class="highlight">
-            <p><span class="emoji">✓</span> <strong>Works offline</strong></p>
-            <ul style="margin-left: 30px;">
-                <li>Once installed, the extension works even without internet</li>
-                <li>Only local storage is used</li>
-            </ul>
-        </div>
-
-        <div class="highlight">
-            <p><span class="emoji">✓</span> <strong>Total transparency</strong></p>
-            <ul style="margin-left: 30px;">
-                <li>We want you to audit us</li>
-                <li>Open source = nothing to hide</li>
-            </ul>
-        </div>
-
-        <div class="footer">
-            <p><strong>Subscription Guardian — Protecting your wallet, respecting your privacy.</strong></p>
-            <p style="margin-top: 10px;">If you believe this extension violates your privacy, please report it to <a href="https://support.google.com/chrome_webstore/" target="_blank">Google Chrome Web Store</a> or <a href="https://support.microsoft.com/en-us/topic/ca4e46c3-61e6-4191-96e5-6152412c9294" target="_blank">Microsoft Edge Add-ons</a>.</p>
-        </div>
-    </div>
+    <footer>
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="https://github.com/Tahir-CS/Subscription-manager" target="_blank" rel="noopener">GitHub</a>
+      <p style="margin-top: 10px;">&copy; 2026 Subscription Guardian</p>
+    </footer>
+  </div>
 </body>
 </html>
